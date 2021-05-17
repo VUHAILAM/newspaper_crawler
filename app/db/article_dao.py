@@ -2,6 +2,7 @@ from datetime import date
 from newspaper import article, source
 from .models import Article, ArticleTag, Category, Sources
 
+
 class ArticleDAO(object):
     def __init__(self, data) -> None:
         self.article = Article()
@@ -33,16 +34,15 @@ class ArticleDAO(object):
         article.publish_date = self.data['publish_date']
         article.content = self.data['content']
 
-        source = Sources.objects(url = self.data['source_url']).first()
+        source = Sources.objects(url=self.data['source_url']).first()
         article.source = source
 
         for cate in self.data['categories']:
             category = Category.objects(category=cate).first()
             article.categories.append(category)
-        
+
         for tag in self.data['tags']:
             article_tag = ArticleTag.objects(tag=tag).first()
             article.tag.append(article_tag)
-        
-        article.save()
 
+        article.save()

@@ -25,7 +25,7 @@ class Article(object):
         publish_date_tag = self.soup.find(tag_name, {'class': class_name})
         if publish_date_tag is None:
             return
-        
+
         date_d = re.search(
             '(\d{1,4})[.\-\/](\d{1,2})[.\-\/](\d{1,4})', publish_date_tag.text)
         day = date_d.group(1)
@@ -37,10 +37,10 @@ class Article(object):
     def extract_tags(self, list_tag_name, list_class_name, tag_name, tag_class_name):
         list_tags_tag = self.soup.find(
             list_tag_name, {'class': list_class_name})
-        
+
         tags_soup = BeautifulSoup(str(list_tags_tag), 'lxml')
         tags = tags_soup.find_all(tag_name, {'class': tag_class_name})
-        
+
         for t in tags:
             self.tags.append(t.text)
 

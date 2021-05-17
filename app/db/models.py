@@ -19,6 +19,7 @@ class ConfigSource(EmbeddedDocument):
     tags = fields.EmbeddedDocumentField(HTMLTag)
     tag = fields.EmbeddedDocumentField(HTMLTag)
 
+
 class Sources(Document):
     url = fields.URLField(required=True, unique=True)
     language = fields.StringField()
@@ -31,9 +32,11 @@ class ArticleTag(Document):
     tag = fields.StringField(unique=True)
     meta = {'collection': 'ArticleTags'}
 
+
 class Category(Document):
     category = fields.StringField(unique=True)
     meta = {'collection': 'Categories'}
+
 
 class Article(Document):
     url = fields.URLField(required=True, unique=True)

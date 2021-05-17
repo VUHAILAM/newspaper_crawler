@@ -48,8 +48,9 @@ if __name__ == '__main__':
     sources = t.get_all_sources()
 
     for src in sources:
-        schedule.every(15).minutes.do(source_job, src=src)
-    
+        for time in src.schedule:
+            schedule.every().day.at(time).do(source_job, src=src)
+
     while True:
         schedule.run_pending()
         time.sleep(1)
