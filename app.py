@@ -13,9 +13,7 @@ def connect_database():
         MONGODB['name'], host='mongodb+srv://hailamvn123:hailamvn456@cluster0.mnwrn.mongodb.net/Newspaper?retryWrites=true&w=majority')
 
 
-def source_job(src):
-    print(src)
-    src_data = json.loads(src)
+def source_job(src_data):
     config = src_data['config']
     source_crawler = Source(
         url=src_data['url'], config=config, lang=src_data['language'])
@@ -48,8 +46,10 @@ if __name__ == '__main__':
     sources = t.get_all_sources()
 
     for src in sources:
-        for time in src.schedule:
-            schedule.every().day.at(time).do(source_job, src=src)
+        src_data = json.loads(src)
+        for hour in src_data['schedule']:
+            print(hour)
+            schedule.every().day.at(str(hour)).do(source_job, src_data=src_data)
 
     while True:
         schedule.run_pending()

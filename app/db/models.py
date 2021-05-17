@@ -24,7 +24,7 @@ class Sources(Document):
     url = fields.URLField(required=True, unique=True)
     language = fields.StringField()
     config = fields.EmbeddedDocumentField(ConfigSource)
-    schedule = fields.ListField(fields.DateTimeField())
+    schedule = fields.ListField(fields.StringField())
     meta = {'collection': 'Sources'}
 
 
