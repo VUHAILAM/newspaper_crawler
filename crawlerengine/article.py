@@ -28,6 +28,9 @@ class Article(object):
 
         date_d = re.search(
             '(\d{1,4})[.\-\/](\d{1,2})[.\-\/](\d{1,4})', publish_date_tag.text)
+        if date_d is None:
+            return
+            
         day = date_d.group(1)
         month = date_d.group(2)
         year = date_d.group(3)
@@ -74,5 +77,5 @@ class Article(object):
                                 ['class_name'], self.config['category']['tag_name'], self.config['category']['class_name'])
         self.extract_tags(self.config['tags']['tag_name'], self.config['tags']
                           ['class_name'], self.config['tag']['tag_name'], self.config['tag']['class_name'])
-        self.extract_author(
-            self.config['author']['tag_name'], self.config['author']['class_name'])
+        #self.extract_author(
+        #    self.config['author']['tag_name'], self.config['author']['class_name'])
